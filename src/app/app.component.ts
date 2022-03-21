@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-interface Cards {
+export interface Cards {
   state: string;
   id: string;
   active: boolean;
-  toDo?: Array<object>;
-  inProgress?: Array<object>;
-  done?: Array<object>;
+  toDo?: any;
+  inProgress?: any;
+  done?: any;
 }
 
 @Component({
@@ -20,7 +20,7 @@ export class AppComponent {
 
   options = ['Easy', 'Medium', 'Hard'];
 
-  cards = [
+  cards: Cards[] = [
     {
       state: 'To-Do',
       id: 'to-do',
@@ -53,61 +53,5 @@ export class AppComponent {
     }
   }
 
-  toProgress(i) {
-    let pushItem = this.cards[0].toDo[i];
-    this.cards[1].inProgress?.push(pushItem);
-    this.cards[0].toDo.splice(i, 1);
 
-    this.cards[1].active = true;
-
-    if (this.cards[0].toDo?.length == 0) {
-      this.cards[0].active = false;
-    }
-  }
-
-  delete(i) {
-    this.cards[0].toDo.splice(i, 1);
-
-    if (this.cards[0].toDo?.length == 0) {
-      this.cards[0].active = false;
-    }
-  }
-
-  toDone(i) {
-    let pushItem = this.cards[1].inProgress[i];
-    this.cards[2].done?.push(pushItem);
-    this.cards[1].inProgress.splice(i, 1);
-
-    this.cards[2].active = true;
-
-    if (this.cards[1].inProgress?.length == 0) {
-      this.cards[1].active = false;
-    }
-  }
-
-  toToDo(i) {
-    let pushItem = this.cards[1].inProgress[i];
-    this.cards[0].toDo?.push(pushItem);
-    this.cards[1].inProgress.splice(i, 1);
-
-    if (this.cards[1].inProgress?.length == 0) {
-      this.cards[1].active = false;
-    }
-    if (this.cards[0].toDo?.length != 0) {
-      this.cards[0].active = true;
-    }
-  }
-
-  toBackInProgress(i) {
-    let pushItem = this.cards[2].done[i];
-    this.cards[1].inProgress?.push(pushItem);
-    this.cards[2].done.splice(i, 1);
-
-    if (this.cards[2].done?.length == 0) {
-      this.cards[2].active = false;
-    }
-    if (this.cards[1].inProgress?.length != 0) {
-      this.cards[1].active = true;
-    }
-  }
 }
