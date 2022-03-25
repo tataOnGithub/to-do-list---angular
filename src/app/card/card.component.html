@@ -1,0 +1,58 @@
+<div class="card-body" id="card-{{card.id}}" *ngIf="card.toDo">
+    <p class="empty-list" *ngIf="!card.active">List is empty</p>
+    <div class="task-wrapper" *ngIf="card.active">
+        <ng-container *ngFor="let number of card.toDo; let i = index">
+            <div class="taks-name-and-buttons">
+                <div class="task-name">
+                    <h3>{{i + 1}}. {{number.inputValue}}</h3>
+                </div>
+                <div class="card-buttons">
+                    <button class="card-button card-button-arrow" (click)="toProgress(i)">></button>
+                    <button class="card-button card-button-delete" (click)="delete(i)">x</button>
+                </div>
+            </div>
+            <div class="selected-value">
+                <p>{{number.selectedValue}}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="card-body" id="card-{{card.id}}" *ngIf="card.inProgress">
+    <p class="empty-list" *ngIf="!card.active">List is empty</p>
+    <div class="task-wrapper" *ngIf="card.active">
+        <ng-container *ngFor="let number of card.inProgress; let i = index">
+            <div class="taks-name-and-buttons">
+                <div class="task-name">
+                    <h3>{{i + 1}}. {{ number.inputValue}}</h3>
+                </div>
+                <div class="card-buttons">
+                    <button class="card-button card-button-arrow" (click)="toToDo(i)">
+                        < </button>
+                            <button class="card-button card-button-arrow" (click)="toDone(i)">></button>
+                </div>
+            </div>
+            <div class="selected-value">
+                <p>{{number.selectedValue}}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>
+<div class="card-body" id="card-{{card.id}}" *ngIf="card.done">
+    <p class="empty-list" *ngIf="!card.active">List is empty</p>
+    <div class="task-wrapper" *ngIf="card.active">
+        <ng-container *ngFor="let number of card.done; let i = index">
+            <div class="taks-name-and-buttons">
+                <div class="task-name">
+                    <h3>{{i + 1}}. {{number.inputValue}}</h3>
+                </div>
+                <div class="card-buttons">
+                    <button class="card-button card-button-arrow" (click)="toBackInProgress(i)">
+                        < </button>
+                </div>
+            </div>
+            <div class="selected-value">
+                <p>{{number.selectedValue}}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>
